@@ -1,0 +1,6 @@
+{
+  "name": "Kestrel Motion",
+  "description": "Real-time 3D animation, procedural WebGL engineering, and interactive spatial product showcases.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

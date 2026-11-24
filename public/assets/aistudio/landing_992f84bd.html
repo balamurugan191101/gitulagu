@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e8f2fb">
+  <title>Ulagu | உலகு</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sky: #e8f2fb;
+      --sand: #e1d5cf;
+      --blue-light: #b2d5f1;
+      --blue: #5db0e6;
+      --orange: #e5863a;
+      --ink: #10283a;
+      --ink-muted: #2f4a5e;
+      --orange-text: #8f4a0c;
+      --ink-card: #1c3d56;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      color: var(--ink);
+      background: var(--sky);
+      scroll-behavior: smooth;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    body { width: 100%; min-width: 0; margin: 0; overflow-x: clip; background: var(--sky); }
+    body, button, input { font: inherit; }
+    body { line-height: 1.55; text-size-adjust: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button, a, input { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 3px solid var(--orange-text); outline-offset: 3px; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { line-height: 1.2; overflow-wrap: anywhere; }
+    p { margin-bottom: 0; }
+    .tamil { font-family: "Noto Sans Tamil", sans-serif; line-height: 1.7; }
+    .container { width: 100%; max-width: 70rem; margin-inline: auto; padding-inline: 1.25rem; }
+
+    .site-header { position: relative; z-index: 5; background: var(--sky); }
+    .header-inner { min-height: 4.5rem; display: flex; align-items: center; gap: .35rem; }
+    .brand { display: inline-flex; align-items: center; gap: .25rem; margin-right: auto; font-size: 1rem; font-weight: 800; white-space: nowrap; }
+    .brand-mark { width: 2rem; height: 2rem; display: grid; flex: 0 0 2rem; place-items: center; font-size: 1.5rem; line-height: 1; }
+    .brand-tamil { color: var(--orange-text); font-size: .875rem; }
+    .language-selector { display: flex; align-items: center; gap: .05rem; padding: .1rem; border: 1px solid var(--ink-muted); border-radius: 999px; }
+    .language-button { min-width: 2.75rem; min-height: 2.75rem; flex: 0 0 2.75rem; padding: .25rem .15rem; border: 0; border-radius: 999px; background: transparent; color: var(--ink); cursor: pointer; font-size: .75rem; font-weight: 700; }
+    .language-button[aria-pressed="true"] { background: var(--ink); color: var(--sky); }
+    .menu-toggle { width: 2.75rem; height: 2.75rem; flex: 0 0 2.75rem; display: grid; align-content: center; justify-items: center; gap: .3rem; padding: .5rem; border: 2px solid var(--ink); border-radius: .75rem; background: transparent; cursor: pointer; }
+    .menu-toggle span { width: 1.15rem; height: 2px; background: currentColor; }
+    .primary-nav { position: absolute; top: 100%; right: 0; left: 0; display: none; gap: .5rem; padding: 1rem 1.25rem 1.25rem; border-top: 1px solid var(--blue-light); background: var(--sky); box-shadow: 0 .75rem 1.25rem rgb(16 40 58 / 12%); }
+    .primary-nav.is-open { display: grid; }
+    .primary-nav a { min-height: 2.75rem; display: flex; align-items: center; padding: .5rem .75rem; border-radius: .75rem; font-weight: 700; overflow-wrap: anywhere; }
+    .primary-nav .nav-join { justify-content: center; padding-inline: 1rem; border-radius: 999px; background: var(--ink); color: var(--sky); text-align: center; }
+
+    .hero-section, .content-section { padding-block: 3rem; }
+    .hero-layout { display: grid; gap: 2.5rem; }
+    .hero-copy { min-width: 0; }
+    .hero-pill { width: fit-content; max-width: 100%; margin-bottom: 1rem; padding: .45rem .85rem; border-radius: 999px; background: var(--blue-light); font-size: .85rem; font-weight: 700; overflow-wrap: anywhere; }
+    .hero-copy h1 { margin-bottom: .75rem; font-size: 2.125rem; line-height: 1.15; letter-spacing: -.035em; }
+    .hero-tamil { margin-bottom: .9rem; color: var(--orange-text); font-size: 1.15rem; font-weight: 700; }
+    .hero-description, .section-heading p, .feature-card p, .step-card p, .team-card p, .join-content > p { color: var(--ink-muted); overflow-wrap: anywhere; }
+    .hero-actions { display: grid; gap: .75rem; margin-top: 1.5rem; }
+    .button { min-height: 3rem; display: inline-flex; align-items: center; justify-content: center; padding: .65rem 1.1rem; border: 2px solid transparent; border-radius: .75rem; cursor: pointer; font-weight: 700; line-height: 1.35; text-align: center; overflow-wrap: anywhere; }
+    .button-primary { background: var(--orange); color: var(--ink); }
+    .button-secondary { border-color: var(--ink); background: transparent; color: var(--ink); }
+    .rights-card { min-width: 0; padding: 1.5rem; border-radius: 1.5rem; background: var(--ink); color: var(--sky); }
+    .rights-card h2 { margin-bottom: 1rem; color: var(--sky); font-size: 1.45rem; }
+    .rights-label { margin-bottom: .7rem; color: var(--orange); font-size: .75rem; font-weight: 800; letter-spacing: .08em; line-height: 1.7; text-transform: uppercase; }
+    .rights-card ul { display: grid; gap: .5rem; margin: 0; padding: 0; list-style: none; }
+    .rights-card li { padding: .7rem .8rem; border-radius: .65rem; background: var(--ink-card); color: var(--sky); overflow-wrap: anywhere; }
+
+    .features-section { background: var(--sand); }
+    .section-heading { max-width: 42rem; margin-bottom: 1.75rem; }
+    .section-heading h2, .join-content h2 { margin-bottom: .65rem; font-size: 1.75rem; }
+    .features-grid, .steps-grid, .team-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+    .steps-grid { gap: 1.5rem; }
+    .feature-card { min-width: 0; padding: 1.25rem; border-radius: 1rem; background: var(--sky); }
+    .feature-number { display: block; margin-bottom: .7rem; color: var(--orange-text); font-size: .9rem; font-weight: 800; }
+    .feature-card h3, .step-card h3, .team-card h3 { margin-bottom: .5rem; font-size: 1.15rem; }
+    .rights-feature { background: var(--ink); color: var(--sky); }
+    .rights-feature h3, .rights-feature p { color: var(--sky); }
+    .rights-feature .feature-number { color: var(--orange); }
+    .step-card { min-width: 0; padding: .25rem 0; }
+    .step-number { width: 2.75rem; height: 2.75rem; display: grid; place-items: center; margin-bottom: 1rem; border-radius: 50%; background: var(--blue); font-size: 1.2rem; font-weight: 800; }
+    .team-section { background: var(--blue-light); }
+    .team-card { min-width: 0; padding: 1.35rem; border-radius: 1rem; background: var(--sky); }
+    .team-role { margin-bottom: .7rem; color: var(--orange-text) !important; font-weight: 700; }
+    .join-content { max-width: 52rem; text-align: center; }
+    .join-content > p { max-width: 42rem; margin-inline: auto; }
+    .waitlist-form { margin-top: 1.5rem; text-align: left; }
+    .waitlist-form label { display: block; margin-bottom: .45rem; font-weight: 700; }
+    .waitlist-controls { display: grid; gap: .75rem; }
+    .waitlist-controls input { width: 100%; min-width: 0; min-height: 3rem; padding: .65rem .8rem; border: 2px solid var(--ink-muted); border-radius: .75rem; background: #fff; color: var(--ink); }
+    .waitlist-controls button:disabled, .waitlist-controls input:disabled { cursor: wait; opacity: .75; }
+    .waitlist-feedback { margin-top: .75rem; color: var(--ink); font-weight: 700; }
+    .waitlist-feedback.is-error { color: var(--orange-text); }
+    .site-footer { padding-block: 2rem; background: var(--ink); color: var(--sky); }
+    .footer-inner { display: grid; justify-items: center; gap: .75rem; text-align: center; }
+    .footer-inner > p { max-width: 42rem; }
+    .footer-brand { display: flex; align-items: baseline; gap: .35rem; color: var(--orange); font-size: 1.25rem; font-weight: 800; }
+    .footer-brand .brand-mark { align-self: center; }
+    .footer-tamil { color: var(--sky); }
+
+    @media (min-width: 600px) {
+      .container { padding-inline: 2rem; }
+      .hero-copy h1 { font-size: 2.625rem; }
+      .section-heading h2, .join-content h2 { font-size: 2rem; }
+      .hero-actions { display: flex; flex-wrap: wrap; }
+      .features-grid, .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .rights-feature { grid-column: span 2; }
+      .waitlist-controls { grid-template-columns: minmax(0, 1fr) auto; }
+    }
+    @media (min-width: 900px) {
+      .content-section, .hero-section { padding-block: 5rem; }
+      .header-inner { min-height: 5rem; gap: 1rem; }
+      .menu-toggle { display: none; }
+      .primary-nav, .primary-nav.is-open { position: static; display: flex; align-items: center; gap: .2rem; padding: 0; border: 0; background: transparent; box-shadow: none; }
+      .primary-nav a { max-width: 8rem; justify-content: center; padding-inline: .3rem; font-size: .8rem; line-height: 1.3; text-align: center; white-space: normal; }
+      .primary-nav .nav-join { margin-left: .25rem; padding-inline: 1rem; }
+      .hero-layout { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); align-items: center; gap: 3rem; }
+      .hero-copy h1 { font-size: 3.25rem; }
+      .rights-card { padding: 2rem; }
+      .features-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .rights-feature { grid-column: span 2; }
+      .steps-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+      .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .footer-inner { grid-template-columns: auto minmax(0, 1fr); align-items: center; justify-items: start; gap: 2rem; text-align: left; }
+    }
+    @media (min-width: 1200px) {
+      .hero-copy h1 { font-size: 3.5rem; }
+      .rights-card { padding: 2.5rem; }
+    }
+    @media (max-width: 640px) {
+      html[lang="ta"] .hero-copy h1 { font-size: 1.25rem; letter-spacing: 0; }
+    }
+    @media (max-width: 360px) {
+      html[lang="ta"] .rights-card h2, html[lang="ta"] .section-heading h2, html[lang="ta"] .join-content h2 { font-size: 1.1rem; }
+    }
+    @media (hover: hover) {
+      .primary-nav a:hover, .button:hover, .language-button:hover { filter: brightness(.94); }
+      .feature-card, .team-card { transition: transform 160ms ease; }
+      .feature-card:hover, .team-card:hover { transform: translateY(-.15rem); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+    }
+    @media print {
+      .site-header, .menu-toggle, .waitlist-form { display: none !important; }
+      body, .landing-page, .landing-page * { background: #fff !important; color: #000 !important; }
+    }
+    html[lang="ta"] { font-family: "Noto Sans Tamil", sans-serif; letter-spacing: 0; }
+    html[lang="ta"] .hero-copy h1 { font-size: clamp(1.4rem, 2.4vw, 2.2rem); letter-spacing: 0; }
+    html[lang="ta"] .rights-card h2, html[lang="ta"] .section-heading h2, html[lang="ta"] .join-content h2 { font-size: clamp(1.3rem, 1.8vw, 1.65rem); }
+  </style>
+</head>
+<body>
+  <div class="landing-page" id="top">
+    <header class="site-header">
+      <div class="header-inner container">
+        <a class="brand" href="#top" aria-label="Ulagu உலகு">
+          <span class="brand-mark" aria-hidden="true">🌍</span>
+          <span data-i18n="brandEnglish">Ulagu</span>
+          <span class="brand-tamil tamil" data-i18n="brandTamil">உலகு</span>
+        </a>
+        <div class="language-selector" role="group" aria-label="Language selector">
+          <button type="button" class="language-button" data-language="en" aria-pressed="true" aria-label="English">EN</button>
+          <button type="button" class="language-button tamil" data-language="ta" aria-pressed="false" aria-label="தமிழ்">தமிழ்</button>
+        </div>
+        <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+        <nav id="primary-navigation" class="primary-nav" aria-label="Main navigation">
+          <a href="#features" data-i18n="navFeatures">What's inside</a>
+          <a href="#how" data-i18n="navHow">How it works</a>
+          <a href="#team" data-i18n="navTeam">Team</a>
+          <a href="/login" data-i18n="login">Login</a>
+          <a class="nav-join" href="#join" data-i18n="joinWaitlist">Join the waitlist</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero-section">
+        <div class="container hero-layout">
+          <div class="hero-copy">
+            <p class="hero-pill" data-i18n="heroPill">Free knowledge for every Indian</p>
+            <h1 data-i18n="heroTitle">Know your rights. Learn anything. Solve it yourself.</h1>
+            <p class="hero-tamil tamil" lang="ta" data-i18n="heroTamilLine">உங்கள் உரிமைகள். உங்கள் மொழியில்.</p>
+            <p class="hero-description" data-i18n="heroParagraph">Ulagu turns government schemes, the Constitution and everyday problems into simple lessons, games and step-by-step guides, in Tamil and English.</p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#join" data-i18n="joinWaitlist">Join the waitlist</a>
+              <a class="button button-secondary" href="#features" data-i18n="seeInside">See what's inside</a>
+            </div>
+          </div>
+          <section class="rights-card" aria-label="The six Fundamental Rights, in plain language">
+            <p class="rights-label tamil" data-i18n="rightsLabel">My Rights · நான் யார்?</p>
+            <h2 data-i18n="rightsTitle">The six Fundamental Rights, in plain language</h2>
+            <ul>
+              <li data-i18n="rightEquality">Right to Equality</li>
+              <li data-i18n="rightFreedom">Right to Freedom</li>
+              <li data-i18n="rightAgainstExploitation">Right against Exploitation</li>
+              <li data-i18n="rightReligion">Right to Freedom of Religion</li>
+              <li data-i18n="rightCultureEducation">Cultural and Educational Rights</li>
+              <li data-i18n="rightRemedies">Right to Constitutional Remedies</li>
+            </ul>
+          </section>
+        </div>
+      </section>
+
+      <section id="features" class="content-section features-section">
+        <div class="container">
+          <div class="section-heading">
+            <h2 data-i18n="featuresTitle">What's inside Ulagu</h2>
+            <p data-i18n="featuresSubtitle">One app instead of many, built around real situations.</p>
+          </div>
+          <div class="features-grid">
+            <article class="feature-card"><span class="feature-number">01</span><h3 data-i18n="featureGamesTitle">Learn through games</h3><p data-i18n="featureGamesText">Quizzes, challenges and animated lessons that make concepts stick.</p></article>
+            <article class="feature-card"><span class="feature-number">02</span><h3 data-i18n="featureProblemTitle">Solve a problem</h3><p data-i18n="featureProblemText">Search what you are stuck on and get the answer, or be pointed to where it can be found.</p></article>
+            <article class="feature-card"><span class="feature-number">03</span><h3 data-i18n="featureGuidesTitle">Government guides</h3><p data-i18n="featureGuidesText">Step-by-step help for schemes, certificates and applications you can do yourself.</p></article>
+            <article class="feature-card"><span class="feature-number">04</span><h3 data-i18n="featureChallengesTitle">Daily challenges</h3><p data-i18n="featureChallengesText">Earn XP, build a streak and keep learning a little every day.</p></article>
+            <article class="feature-card rights-feature"><span class="feature-number">05</span><h3 class="tamil" data-i18n="featureRightsTitle">My Rights · நான் யார்?</h3><p data-i18n="featureRightsText">The Constitution of India explained through real-life situations, with helplines and a rights quiz, so you know what to do when something goes wrong.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="how" class="content-section how-section">
+        <div class="container">
+          <div class="section-heading"><h2 data-i18n="howTitle">How it works</h2></div>
+          <div class="steps-grid">
+            <article class="step-card"><span class="step-number">1</span><h3 data-i18n="stepOneTitle">Tell Ulagu your problem</h3><p data-i18n="stepOneText">Type it the way you would say it, in Tamil or English.</p></article>
+            <article class="step-card"><span class="step-number">2</span><h3 data-i18n="stepTwoTitle">Follow simple steps</h3><p data-i18n="stepTwoText">Get a clear guide, lesson or the right you can claim.</p></article>
+            <article class="step-card"><span class="step-number">3</span><h3 data-i18n="stepThreeTitle">Do it yourself</h3><p data-i18n="stepThreeText">Handle the small things on your own and know where to go for the big ones.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="team" class="content-section team-section">
+        <div class="container">
+          <div class="section-heading"><h2 data-i18n="teamTitle">The people behind Ulagu</h2></div>
+          <div class="team-grid">
+            <article class="team-card"><h3>Arun Prakash V</h3><p class="team-role" data-i18n="founderTitle">Founder &amp; Trustee</p><p data-i18n="founderText">Came up with the core idea of a free knowledge app for the public. He is funding its development and launch.</p></article>
+            <article class="team-card"><h3>Durai Raj N</h3><p class="team-role" data-i18n="managingDirectorTitle">Managing Director</p><p data-i18n="managingDirectorText">Developed the idea into a product, adding features such as My Rights (நான் யார்?), and leads its direction.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="join" class="content-section join-section">
+        <div class="container join-content">
+          <h2 data-i18n="joinTitle">Be among the first to try Ulagu</h2>
+          <p data-i18n="joinText">Launching around Constitution Day, 26 November 2026. Join the waitlist and we will tell you when it is ready.</p>
+          <form class="waitlist-form" id="waitlist-form">
+            <label for="waitlist-email" data-i18n="emailLabel">Email address</label>
+            <div class="waitlist-controls">
+              <input id="waitlist-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+              <button type="submit" class="button button-primary" data-i18n="submitWaitlist">Join the waitlist</button>
+            </div>
+            <p class="waitlist-feedback" id="waitlist-feedback" role="status" hidden></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p class="footer-brand"><span class="brand-mark" aria-hidden="true">🌍</span><span data-i18n="brandEnglish">Ulagu</span><span class="footer-tamil tamil" data-i18n="brandTamil">உலகு</span></p>
+        <p data-i18n="footerDescription">Ulagu shares general information to help people understand their rights and public services. It is not legal advice.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const WAITLIST_API_URL = ''; // TODO: Set this to your real waitlist endpoint.
+    const messages = {
+      en: {
+        brandEnglish: 'Ulagu', brandTamil: 'உலகு', navFeatures: "What's inside", navHow: 'How it works', navTeam: 'Team', login: 'Login', joinWaitlist: 'Join the waitlist',
+        menuOpen: 'Open navigation menu', menuClose: 'Close navigation menu', heroPill: 'Free knowledge for every Indian',
+        heroTitle: 'Know your rights. Learn anything. Solve it yourself.', heroTamilLine: 'உங்கள் உரிமைகள். உங்கள் மொழியில்.',
+        heroParagraph: 'Ulagu turns government schemes, the Constitution and everyday problems into simple lessons, games and step-by-step guides, in Tamil and English.',
+        seeInside: "See what's inside", rightsLabel: 'My Rights · நான் யார்?', rightsTitle: 'The six Fundamental Rights, in plain language',
+        rightEquality: 'Right to Equality', rightFreedom: 'Right to Freedom', rightAgainstExploitation: 'Right against Exploitation',
+        rightReligion: 'Right to Freedom of Religion', rightCultureEducation: 'Cultural and Educational Rights', rightRemedies: 'Right to Constitutional Remedies',
+        featuresTitle: "What's inside Ulagu", featuresSubtitle: 'One app instead of many, built around real situations.',
+        featureGamesTitle: 'Learn through games', featureGamesText: 'Quizzes, challenges and animated lessons that make concepts stick.',
+        featureProblemTitle: 'Solve a problem', featureProblemText: 'Search what you are stuck on and get the answer, or be pointed to where it can be found.',
+        featureGuidesTitle: 'Government guides', featureGuidesText: 'Step-by-step help for schemes, certificates and applications you can do yourself.',
+        featureChallengesTitle: 'Daily challenges', featureChallengesText: 'Earn XP, build a streak and keep learning a little every day.',
+        featureRightsTitle: 'My Rights · நான் யார்?', featureRightsText: 'The Constitution of India explained through real-life situations, with helplines and a rights quiz, so you know what to do when something goes wrong.',
+        howTitle: 'How it works', stepOneTitle: 'Tell Ulagu your problem', stepOneText: 'Type it the way you would say it, in Tamil or English.',
+        stepTwoTitle: 'Follow simple steps', stepTwoText: 'Get a clear guide, lesson or the right you can claim.',
+        stepThreeTitle: 'Do it yourself', stepThreeText: 'Handle the small things on your own and know where to go for the big ones.',
+        teamTitle: 'The people behind Ulagu', founderTitle: 'Founder & Trustee',
+        founderText: 'Came up with the core idea of a free knowledge app for the public. He is funding its development and launch.',
+        managingDirectorTitle: 'Managing Director', managingDirectorText: 'Developed the idea into a product, adding features such as My Rights (நான் யார்?), and leads its direction.',
+        joinTitle: 'Be among the first to try Ulagu', joinText: 'Launching around Constitution Day, 26 November 2026. Join the waitlist and we will tell you when it is ready.',
+        emailLabel: 'Email address', submitWaitlist: 'Join the waitlist', submittingWaitlist: 'Joining...',
+        waitlistSuccess: "You're on the list. We will be in touch when Ulagu is ready.",
+        waitlistNotConfigured: 'The waitlist is not accepting submissions yet. Please try again later.',
+        waitlistError: 'We could not join the waitlist right now. Please try again later.',
+        footerDescription: 'Ulagu shares general information to help people understand their rights and public services. It is not legal advice.',
+        languageSelector: 'Language selector', english: 'English', tamil: 'Tamil', navLabel: 'Main navigation'
+      },
+      ta: {
+        brandEnglish: 'Ulagu', brandTamil: 'உலகு', navFeatures: 'உலகுவில் என்ன உள்ளது?', navHow: 'இது எப்படி செயல்படுகிறது', navTeam: 'குழு', login: 'உள்நுழைக', joinWaitlist: 'காத்திருப்புப் பட்டியலில் சேருங்கள்',
+        menuOpen: 'வழிசெலுத்தல் பட்டியைத் திறக்கவும்', menuClose: 'வழிசெலுத்தல் பட்டியை மூடவும்', heroPill: 'ஒவ்வொரு இந்தியருக்கும் இலவச அறிவு',
+        heroTitle: 'உங்கள் உரிமைகளை அறியுங்கள். எதையும் கற்றுக்கொள்ளுங்கள். நீங்களே தீர்வு காணுங்கள்.', heroTamilLine: 'உங்கள் உரிமைகள். உங்கள் மொழியில்.',
+        heroParagraph: 'அரசுத் திட்டங்கள், அரசியலமைப்பு மற்றும் அன்றாடப் பிரச்சினைகளை எளிய பாடங்கள், விளையாட்டுகள், படிப்படியான வழிகாட்டிகளாகத் தமிழிலும் ஆங்கிலத்திலும் உலகு வழங்குகிறது.',
+        seeInside: 'உள்ளடக்கத்தைப் பாருங்கள்', rightsLabel: 'என் உரிமைகள் · நான் யார்?', rightsTitle: 'ஆறு அடிப்படை உரிமைகள் — எளிய மொழியில்',
+        rightEquality: 'சமத்துவ உரிமை', rightFreedom: 'சுதந்திர உரிமை', rightAgainstExploitation: 'சுரண்டலுக்கு எதிரான உரிமை',
+        rightReligion: 'மதச் சுதந்திர உரிமை', rightCultureEducation: 'கலாச்சார மற்றும் கல்வி உரிமைகள்', rightRemedies: 'அரசியலமைப்பு வழித் தீர்வுகளைப் பெறும் உரிமை',
+        featuresTitle: 'உலகுவில் என்ன உள்ளது', featuresSubtitle: 'நிஜ வாழ்க்கைச் சூழல்களை மையமாகக் கொண்ட ஒரே செயலி.',
+        featureGamesTitle: 'விளையாட்டுகள் மூலம் கற்கலாம்', featureGamesText: 'கருத்துகளை நினைவில் நிறுத்தும் வினாடி வினாக்கள், சவால்கள், அசைவூட்டப் பாடங்கள்.',
+        featureProblemTitle: 'பிரச்சினைக்குத் தீர்வு காணுங்கள்', featureProblemText: 'உங்கள் சிக்கலைத் தேடி விடையைக் கண்டறியுங்கள்; அல்லது அதைக் கண்டுபிடிக்க வேண்டிய இடத்தை அறியுங்கள்.',
+        featureGuidesTitle: 'அரசுச் சேவை வழிகாட்டிகள்', featureGuidesText: 'நீங்களே பெறக்கூடிய திட்டங்கள், சான்றிதழ்கள், விண்ணப்பங்களுக்கான படிப்படியான உதவி.',
+        featureChallengesTitle: 'தினசரி சவால்கள்', featureChallengesText: 'XP புள்ளிகளைப் பெற்று, தொடர்ச்சியை உருவாக்கி, தினமும் கொஞ்சம் கற்றுக்கொள்ளுங்கள்.',
+        featureRightsTitle: 'என் உரிமைகள் · நான் யார்?', featureRightsText: 'நிஜ வாழ்க்கைச் சூழல்கள் மூலம் இந்திய அரசியலமைப்பை அறியுங்கள். உதவி எண்களும் உரிமைகள் வினாடி வினாவும், சிக்கல் நேரத்தில் என்ன செய்ய வேண்டும் என்பதைப் புரியவைக்கும்.',
+        howTitle: 'இது எப்படி செயல்படுகிறது', stepOneTitle: 'உங்கள் பிரச்சினையை உலகுவிடம் சொல்லுங்கள்', stepOneText: 'தமிழிலோ ஆங்கிலத்திலோ, நீங்கள் பேசுவது போலவே தட்டச்சு செய்யுங்கள்.',
+        stepTwoTitle: 'எளிய படிகளைப் பின்பற்றுங்கள்', stepTwoText: 'தெளிவான வழிகாட்டி, பாடம் அல்லது நீங்கள் கோரக்கூடிய உரிமையைப் பெறுங்கள்.',
+        stepThreeTitle: 'நீங்களே செய்து பாருங்கள்', stepThreeText: 'சிறிய வேலைகளை நீங்களே செய்து, பெரிய உதவிகளுக்கு எங்கு செல்ல வேண்டும் என்பதை அறியுங்கள்.',
+        teamTitle: 'உலகுவின் பின்னால் இருக்கும் மனிதர்கள்', founderTitle: 'நிறுவனர் மற்றும் அறங்காவலர்',
+        founderText: 'பொதுமக்களுக்கான இலவச அறிவுச் செயலி என்ற அடிப்படை யோசனையை உருவாக்கினார். அதன் மேம்பாடு மற்றும் தொடக்கத்திற்கான நிதியை வழங்குகிறார்.',
+        managingDirectorTitle: 'நிர்வாக இயக்குநர்', managingDirectorText: 'இந்த யோசனையை ஒரு தயாரிப்பாக உருவாக்கி, என் உரிமைகள் (நான் யார்?) போன்ற அம்சங்களைச் சேர்த்து, அதன் செயல்திசையை வழிநடத்துகிறார்.',
+        joinTitle: 'உலகுவை முதலில் முயற்சிப்பவர்களில் ஒருவராகுங்கள்', joinText: '2026 நவம்பர் 26, அரசியலமைப்பு தினத்தை ஒட்டி வெளியிடத் திட்டமிட்டுள்ளோம். தயாரானதும் தெரிவிக்க, காத்திருப்புப் பட்டியலில் சேருங்கள்.',
+        emailLabel: 'மின்னஞ்சல் முகவரி', submitWaitlist: 'காத்திருப்புப் பட்டியலில் சேருங்கள்', submittingWaitlist: 'சேர்க்கப்படுகிறது...',
+        waitlistSuccess: 'நீங்கள் பட்டியலில் சேர்ந்துவிட்டீர்கள். உலகு தயாரானதும் தொடர்புகொள்வோம்.',
+        waitlistNotConfigured: 'காத்திருப்புப் பட்டியல் இன்னும் பதிவுகளை ஏற்கவில்லை. பின்னர் மீண்டும் முயற்சிக்கவும்.',
+        waitlistError: 'இப்போது காத்திருப்புப் பட்டியலில் சேர்க்க முடியவில்லை. பின்னர் மீண்டும் முயற்சிக்கவும்.',
+        footerDescription: 'உங்கள் உரிமைகள் மற்றும் பொதுச் சேவைகளைப் புரிந்துகொள்ள உலகு பொதுத் தகவல்களை வழங்குகிறது. இது சட்ட ஆலோசனை அல்ல.',
+        languageSelector: 'மொழித் தேர்வு', english: 'ஆங்கிலம்', tamil: 'தமிழ்', navLabel: 'முதன்மை வழிசெலுத்தல்'
+      }
+    };
+
+    const menuButton = document.querySelector('.menu-toggle');
+    const navigation = document.querySelector('.primary-nav');
+    const feedback = document.querySelector('#waitlist-feedback');
+
+    function setLanguage(language) {
+      const selectedLanguage = language === 'ta' ? 'ta' : 'en';
+      document.documentElement.lang = selectedLanguage;
+      document.querySelectorAll('[data-i18n]').forEach((element) => {
+        const key = element.dataset.i18n;
+        const translation = messages[selectedLanguage][key];
+        if (translation) element.textContent = translation;
+      });
+      document.querySelectorAll('[data-language]').forEach((button) => {
+        const active = button.dataset.language === selectedLanguage;
+        button.setAttribute('aria-pressed', String(active));
+        button.setAttribute('aria-label', messages[selectedLanguage][button.dataset.language === 'en' ? 'english' : 'tamil']);
+      });
+      document.querySelector('.language-selector').setAttribute('aria-label', messages[selectedLanguage].languageSelector);
+      navigation.setAttribute('aria-label', messages[selectedLanguage].navLabel);
+      menuButton.setAttribute('aria-label', messages[selectedLanguage][menuButton.getAttribute('aria-expanded') === 'true' ? 'menuClose' : 'menuOpen']);
+      try { localStorage.setItem('ulagu-language', selectedLanguage); } catch (error) { console.warn('Unable to save language preference.', error); }
+    }
+
+    function closeMenu() {
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.setAttribute('aria-label', messages[document.documentElement.lang].menuOpen);
+      navigation.classList.remove('is-open');
+    }
+
+    document.querySelectorAll('[data-language]').forEach((button) => {
+      button.addEventListener('click', () => setLanguage(button.dataset.language));
+    });
+    menuButton.addEventListener('click', () => {
+      const open = menuButton.getAttribute('aria-expanded') !== 'true';
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.setAttribute('aria-label', messages[document.documentElement.lang][open ? 'menuClose' : 'menuOpen']);
+      navigation.classList.toggle('is-open', open);
+    });
+    navigation.addEventListener('click', (event) => {
+      if (event.target.closest('a')) closeMenu();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeMenu();
+    });
+    document.querySelector('#waitlist-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const language = document.documentElement.lang;
+      if (!WAITLIST_API_URL) {
+        feedback.textContent = messages[language].waitlistNotConfigured;
+        feedback.classList.add('is-error');
+        feedback.hidden = false;
+        return;
+      }
+      const button = event.currentTarget.querySelector('button[type="submit"]');
+      button.disabled = true;
+      feedback.hidden = true;
+      try {
+        const response = await fetch(WAITLIST_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: event.currentTarget.elements.email.value.trim() })
+        });
+        if (!response.ok) throw new Error(`Waitlist request failed with status ${response.status}.`);
+        feedback.textContent = messages[language].waitlistSuccess;
+        feedback.classList.remove('is-error');
+        event.currentTarget.reset();
+      } catch (error) {
+        console.error('Unable to submit the waitlist request.', error);
+        feedback.textContent = messages[language].waitlistError;
+        feedback.classList.add('is-error');
+      } finally {
+        feedback.hidden = false;
+        button.disabled = false;
+      }
+    });
+
+    let savedLanguage = 'en';
+    try { savedLanguage = localStorage.getItem('ulagu-language') || 'en'; } catch (error) { console.warn('Unable to read language preference.', error); }
+    setLanguage(savedLanguage);
+  </script>
+</body>
+</html>
